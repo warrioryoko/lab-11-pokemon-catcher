@@ -25,7 +25,7 @@ export function getLocalStorage() {
     return data;
 }
 
-export function encounterList(id) {
+export function trackEncounters(id) {
     //This is just calling getLocalStorage to convert string data in local storage to an array
     const localData = getLocalStorage();
     const foundItem = findById(localData, id.id);
@@ -46,4 +46,46 @@ export function encounterList(id) {
     //Take the updated list of items/encounters and push it to local storage
     const stringData = JSON.stringify(localData);
     localStorage.setItem('POKECOUNTER', stringData);
+}
+
+export function trackCaptures(id) {
+    const localData = getLocalStorage();
+    const foundItem = findById(localData, id);
+
+    if (foundItem) {
+        foundItem.captured++;
+    }
+    const stringData = JSON.stringify(localData);
+    localStorage.setItem('POKECOUNTER', stringData);
+}
+
+export function mungeNameData(localData) {
+    const itemNames = [];
+
+    for (let i = 0; i < localData.length; i++) {
+        const singleItem = localData[i];
+        itemNames.push(singleItem.name);
+    }
+    return itemNames;
+}
+
+export function mungeCaptureData(localData) {
+    const itemsCaptured = [];
+
+    for (let i = 0; i < localData.length; i++) {
+        const singleItem = localData[i];
+        itemsCaptured.push(singleItem.captured);
+    }
+    return itemsCaptured;
+}
+
+export function mungeEncounterData(localData) {
+    const itemsEncountered = [];
+
+    for (let i = 0; i < localData.length; i++) {
+        const singleItem = localData[i];
+
+        itemsEncountered.push(singleItem.encountered);
+    }
+    return itemsEncountered;
 }
