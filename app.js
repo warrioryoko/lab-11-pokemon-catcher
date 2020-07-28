@@ -16,7 +16,7 @@ if (!encountersList) {
 }
 
 const currentStats = getLocalStorage();
-const notEncountered, possibleEncounters = encountersList.slice();
+//const notEncountered, possibleEncounters = encountersList.slice();
 // set event listeners to update state and DOM
 function initializePage() {
     if (captures === 0) {
